@@ -1,3 +1,6 @@
 [submodule "automail"]
 	path = automail
 	url = git@github.com:rationalcarl/automail.git
+[submodule "tweepy"]
+	path = tweepy
+	url = https://github.com/tweepy/tweepy.git
