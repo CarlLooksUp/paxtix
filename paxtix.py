@@ -1,6 +1,8 @@
 from argparse import ArgumentParser
 from tweepy.auth import OAuthHandler
 from tweepy.streaming import Stream, StreamListener
+from automail import automail
+import re
 
 
 def parse_oauth_file(oauthFileLoc):
@@ -26,7 +28,11 @@ class PaxListener(StreamListener):
     '''
 
     def on_status(self, status):
-        print "%s: %s" % (status.user.name, status.text)
+        if re.search(r'east|ticket|tickets|registration|open', status.text, re.IGNORECASE): #regex open for editing
+            subject = "New message from %s" % status.user.name.encode('ascii', 'xmlcharrefreplace')
+            message = status.text.encode('ascii', 'xmlcharrefreplace')
+            automail.send_email(automail.parse_settings("mail_settings.txt"),
+                                subject, message)
         return True
 
     def on_error(self, status):
@@ -57,8 +63,9 @@ def main():
     stream = Stream(auth, pl)
     #stream.filter(track=["the"])
 
-    stream.filter(track=['ticket', 'tickets', 'east'],
-    follow=['@Official_PAX'])
+    pax_user_id = '26281970' #follow requires userid, found at mytwitterid.com
+    stream.filter(follow=['1954653840']) #track ignores follow, pulls from firehose regardless (this is testing acct)
+
 
 
 if __name__ == "__main__":
