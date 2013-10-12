@@ -1,4 +1,7 @@
+import os
+import sys
 from argparse import ArgumentParser
+sys.path.append(os.path.join(os.path.dirname(__file__), 'tweepy'))
 from tweepy.auth import OAuthHandler
 from tweepy.streaming import Stream, StreamListener
 from automail import automail
