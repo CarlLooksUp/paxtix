@@ -110,7 +110,8 @@ class PaxListener(StreamListener):
             msg = sa[self.c - 48]
         else:
             msg = "heatbeat"
-        self.api.update_status(msg)
+        timestr = datetime.datetime.utcnow().isoformat()
+        self.api.update_status("%s %s" % (msg, timestr))
         t = threading.Timer(3600, self.hourly_heartbeat)
         t.start()
         self.c = self.c + 1
