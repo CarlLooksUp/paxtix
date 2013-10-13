@@ -3,12 +3,12 @@ import sys
 from argparse import ArgumentParser
 import traceback
 from automail.automail import parse_settings, send_email
-from tweepy.api import API
 import datetime
 import threading
 sys.path.append(os.path.join(os.path.dirname(__file__), 'tweepy'))
 from tweepy.auth import OAuthHandler
 from tweepy.streaming import Stream, StreamListener
+from tweepy.api import API
 import re
 
 sa = '''
