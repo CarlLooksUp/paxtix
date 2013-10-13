@@ -149,7 +149,8 @@ def main():
         #stream.filter(track=["the"])
     
         pax_user_id = '26281970' #follow requires userid, found at mytwitterid.com
-        stream.filter(follow=['1954653840']) #track ignores follow, pulls from firehose regardless (this is testing acct)
+        daemon_user_id = '1954653840'
+        stream.filter(follow=[pax_user_id]) #track ignores follow, pulls from firehose regardless (this is testing acct)
 
     except BaseException as e:
         subject = "Exception from paxtix"
