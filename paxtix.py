@@ -80,6 +80,7 @@ class PaxListener(StreamListener):
         self.mail_settings = parse_settings(mail_settings_loc)
         self.c = 0
         self.hourly_heartbeat()
+        self.daily_heartbeat()
     '''
     uncomment this if you want to see what a 'status' object will look like
     '''
